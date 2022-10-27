@@ -21,3 +21,9 @@ const Task = (props) => {
       </div>
     `
 }
+
+const renderTasks = (items) => {
+    document.querySelector('.todo__tasks').innerHTML = items
+    .map((item) => Task(item))
+    .join('') 
+}
