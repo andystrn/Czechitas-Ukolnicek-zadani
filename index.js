@@ -1,14 +1,13 @@
 console.log('funguju!');
 
 const Task = (props) => {
-    {name, due, done} = props;
+    const {name, due, done} = props;
 
     let doneClass = '';
-    const doneSign = '';
+    let doneSign = '';
     if (done) {
         doneClass = 'task__done';
-        doneSign = '✓';
-        
+        doneSign = '✓'; 
     } 
     
         return `
@@ -27,3 +26,7 @@ const renderTasks = (items) => {
     .map((item) => Task(item))
     .join('') 
 }
+
+fetch('https://apps.kodim.cz/daweb/trening-api/apis/tasks-api/tasks')
+.then((response) => response.json())
+.then((data) => renderTasks(data));
