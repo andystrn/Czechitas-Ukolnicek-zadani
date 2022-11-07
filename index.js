@@ -1,7 +1,6 @@
 console.log('funguju!');
 
-const Task = (props) => {
-    const {name, due, done} = props;
+const Task = ({name, due, done}) => {
 
     let doneClass = '';
     let doneSign = '';
@@ -16,7 +15,7 @@ const Task = (props) => {
                 <div class="task__name">${name}</div>
                 <div class="task__due">${due}</div>
             </div>
-            <div class=${doneClass}>${doneSign}</div>
+            <div class="${doneClass}">${doneSign}</div>
         </div>
     `
 };
@@ -29,11 +28,11 @@ const renderTasks = (items) => {
 
 fetch('https://apps.kodim.cz/daweb/trening-api/apis/tasks-api/tasks')
 .then((response) => response.json())
-.then((data) => renderTasks(data));
+.then(renderTasks);
 
 const checkElm = document.getElementById('checkbox-undone');
-checkElm.addEventListener('click', (event) => {
-  if (checkElm.checked == true) { 
+checkElm.addEventListener('change', (event) => {
+  if (checkElm.checked) { 
     fetch('https://apps.kodim.cz/daweb/trening-api/apis/tasks-api/tasks?done=false')
     .then((response) => response.json())
     .then((data) => renderTasks(data));
